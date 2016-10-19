@@ -1,2 +1,2 @@
-# data-viz
-Taking real-time data streams and translating them into dashboards that users can consume
+# data-viz-bridge
+Intermediate between lambda and the dat-viz frontend
