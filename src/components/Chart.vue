@@ -69,7 +69,7 @@
     });
 
     chart.draw(table, {
-      title: 'Realtime Gumshoe Event Counts',
+      title: 'Realtime Gumshoe Events',
       chartArea: { width: '55%' }
     });
 
