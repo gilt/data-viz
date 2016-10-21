@@ -1,11 +1,9 @@
-const path = require('path');
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-
+const path = require('path'),
+  webpack = require('webpack'),
+  ExtractTextPlugin = require('extract-text-webpack-plugin'),
+  CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: './src/main.js',
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',
@@ -46,7 +44,8 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue'
-    }
+    },
+    extensions: ['.js', '.vue']
   },
   entry: {
     'index': [
@@ -59,8 +58,9 @@ module.exports = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new CopyWebpackPlugin([
-      { from: 'src/index.html' }
-    ])
+    new CopyWebpackPlugin(
+      [{ from: 'src/index.html' }],
+      { copyUnmodified: true }
+    )
   ]
-}
+};

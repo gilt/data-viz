@@ -2,11 +2,11 @@ import eslint from 'gulp-eslint';
 import gulp from 'gulp';
 
 gulp.task('lint', () => {
-  let glob = [
-    'index.js',
-    'app.js',
-    'routes.js',
-    'gulpfile.babel.js'
+  const glob = [
+    '**/*.js',
+    '**/*.vue',
+    '!dist/**/*',
+    '!node_modules'
   ];
 
   return gulp.src(glob)

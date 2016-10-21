@@ -1,24 +1,20 @@
 'use strict';
 
-import bodyParser from 'koa-bodyparser';
-import colors from 'colors';
+import 'colors';
 import Koa from 'koa';
-import routes from './routes';
+import bodyParser from 'koa-bodyparser';
 import serve from 'koa-static';
-import sockets from './sockets';
-
-import * as path from 'path';
-import convert from 'koa-convert';
-
-import Webpack from 'webpack';
 import { devMiddleware, hotMiddleware } from 'koa-webpack-middleware';
+import Webpack from 'webpack';
+
+import sockets from './sockets';
 import config from './webpack.config.js';
-const webpack = Webpack(config);
 
 const app = new Koa(),
-  socket = sockets(app),
-  router = routes(socket),
+  webpack = Webpack(config),
   port = 3000;
+
+sockets(app);
 
 app
   .use(bodyParser())
@@ -38,9 +34,6 @@ app
     path: '/__webpack_hmr',
     heartbeat: 10 * 1000
   }))
-
-  // .use(router.routes())
-  // .use(router.allowedMethods())
 
   .listen(port, () => {
     console.log('Server Started ∹'.green, 'http://localhost:'.grey + port.toString().blue);
